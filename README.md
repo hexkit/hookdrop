@@ -18,22 +18,40 @@ This project allows you to create temporary webhook URLs that forward incoming H
 
 ## Getting Started
 
-### 🔧 Installation
+### 🔧 Install Locally (Optional)
 
 ```bash
-git clone https://github.com/hexkit/hookdrop.git
-cd hookdrop
+git clone https://github.com/hexkit/webhook-tunnel.git
+cd webhook-tunnel
 pip install -r requirements.txt
-```
-
-### 🚀 Run Locally
-
-```bash
-python3 main.py
+uvicorn src.main:app --reload
 ```
 
 ---
 
+### 🐳 Run with Docker
+
+> Make sure you have Docker installed: https://docs.docker.com/get-docker/
+
+#### 🔹 Build the image:
+
+```bash
+docker build -t webhook-tunnel .
+```
+
+#### 🔹 Run the container:
+
+```bash
+docker run -p 8000:8000 webhook-tunnel
+```
+
+Then open:
+
+```
+http://localhost:8000/docs
+```
+
+---
 ## Usage
 
 ### Create a tunnel
