@@ -28,3 +28,4 @@ async def delete_tunnel(
         delete(Tunnel)
         .where(Tunnel.id == id)
     )
+    await db_session.commit()

@@ -1,18 +1,4 @@
 modules = ["python-3.11"]
-[nix]
-packages = ["docker-client", "flyctl", "fly"]
-
-[workflows]
-runButton = "Run"
-
-[[workflows.workflow]]
-name = "Run"
-author = 40557157
-mode = "sequential"
-
-[[workflows.workflow.tasks]]
-task = "shell.exec"
-args = "python main.py"
 
 [[ports]]
 localPort = 8000
