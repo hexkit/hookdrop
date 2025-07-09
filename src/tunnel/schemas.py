@@ -6,4 +6,5 @@ class NewTunnelRequest(BaseModel):
 
 
 class TunnelOut(BaseModel):
+    id: str
     url: str = "http://domain.com/hook/{id}"

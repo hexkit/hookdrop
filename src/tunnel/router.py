@@ -23,14 +23,14 @@ async def new_tunnel_handler(
     tunnel = await new_tunnel(db_session, target_url)
     print(str(tunnel.target_url) + ','+ tunnel.id)
     return {
-        "url": f"/hook/{tunnel.id}"
+        "id": tunnel.id,
+        "url": f"/hook/{tunnel.id}",
     }
 
 
 @router.delete(
     "/tunnels/{tunnel_id}",
     status_code=204,
-    response_model=str,
 )
 async def delete_tunnel_handler(
     tunnel_id: str,
