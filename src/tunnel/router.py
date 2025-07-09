@@ -1,8 +1,8 @@
-from fastapi import APIRouter
+from fastapi import APIRouter, HTTPException
 
 from src.database import DbSession
 from .schemas import NewTunnelRequest, TunnelOut
-from .service import new_tunnel
+from .service import new_tunnel, get_tunnel, delete_tunnel
 from .models import Tunnel
 
 
@@ -25,3 +25,22 @@ async def new_tunnel_handler(
     return {
         "url": f"/hook/{tunnel.id}"
     }
+
+
+@router.delete(
+    "/tunnels/{tunnel_id}",
+    status_code=204,
+    response_model=str,
+)
+async def delete_tunnel_handler(
+    tunnel_id: str,
+    db_session: DbSession,
+):
+    tunnel_exists = await get_tunnel(db_session, tunnel_id)
+    if not tunnel_exists:
+        raise HTTPException(
+            status_code=404,
+            detail="Tunnel not found"
+        )
+    await delete_tunnel(db_session, tunnel_id)
+    

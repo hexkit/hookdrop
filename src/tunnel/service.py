@@ -1,4 +1,4 @@
-from src.database import AsyncSession
+from src.database import AsyncSession, delete
 
 from .models import Tunnel
 
@@ -18,4 +18,13 @@ async def get_tunnel(
     id: str,
 ) -> Tunnel:
     return await db_session.get(Tunnel, id)
-    
+
+
+async def delete_tunnel(
+    db_session: AsyncSession,
+    id: str,
+) -> None:
+    await db_session.execute(
+        delete(Tunnel)
+        .where(Tunnel.id == id)
+    )
